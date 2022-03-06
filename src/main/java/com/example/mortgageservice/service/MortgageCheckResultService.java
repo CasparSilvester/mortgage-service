@@ -25,6 +25,7 @@ public class MortgageCheckResultService {
 
         //validate according to business rules
         boolean feasible =
+                shouldNotContainZeroValues(mortgageCheckData)&&
                 mortgageShouldNotExceed4TimesIncome(mortgageCheckData)&&
                         mortgageShouldNotExceedHomeValue(mortgageCheckData);
 
@@ -57,7 +58,17 @@ public class MortgageCheckResultService {
     }
 
     private BigDecimal calculateMonthlyCost(MortgageCheckData mortgageCheckData){
+        if(mortgageCheckData.getMaturityPeriod()<=0) return BigDecimal.ZERO;
         return mortgageCheckData.getLoanValue().divide(new BigDecimal(mortgageCheckData.getMaturityPeriod()),2, RoundingMode.CEILING);
 
+    }
+
+    private boolean shouldNotContainZeroValues(MortgageCheckData mortgageCheckData){
+
+        return
+                (mortgageCheckData.getIncome().compareTo(BigDecimal.ZERO)>0) &&
+                        (mortgageCheckData.getMaturityPeriod()>0) &&
+                        (mortgageCheckData.getLoanValue().compareTo(BigDecimal.ZERO)>0) &&
+                        (mortgageCheckData.getHomeValue().compareTo(BigDecimal.ZERO)>0);
     }
 }
