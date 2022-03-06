@@ -1,5 +1,6 @@
 package com.example.mortgageservice.service;
 
+import com.example.mortgageservice.exception.IDProvidedException;
 import com.example.mortgageservice.model.MortgageCheckData;
 import com.example.mortgageservice.model.MortgageCheckResult;
 import com.example.mortgageservice.repository.MortgageCheckDataRepository;
@@ -21,6 +22,7 @@ public class MortgageCheckDataService {
 
     public MortgageCheckResult saveMortgageCheckData(MortgageCheckData mortgageCheckData){
         logger.info("saving MortgageCheckData-entry");
+        if(mortgageCheckData.getId()!= null) throw new IDProvidedException();
         mortgageCheckDataRepository.save(mortgageCheckData);
         return mortgageCheckResultService.validate(mortgageCheckData);
 

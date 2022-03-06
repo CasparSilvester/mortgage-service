@@ -22,6 +22,17 @@ public class ControllerAdvisor extends ResponseEntityExceptionHandler {
         body.put("message", "Invalid JSON: refer to api-specifications at /api/v3/api-docs " +
                 "or try testing at /api/swagger-ui/index.html");
 
-        return new ResponseEntity<>(body, HttpStatus.NOT_FOUND);
+        return new ResponseEntity<>(body, HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler(IDProvidedException.class)
+    public ResponseEntity<Object> handleIDProvidedException(
+            IDProvidedException ex) {
+
+        Map<String, Object> body = new LinkedHashMap<>();
+        body.put("timestamp", LocalDateTime.now());
+        body.put("message", "Invalid JSON: id element not allowed");
+
+        return new ResponseEntity<>(body, HttpStatus.BAD_REQUEST);
     }
 }
