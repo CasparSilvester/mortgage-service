@@ -1,6 +1,9 @@
 package com.example.mortgageservice.model;
 
 import javax.persistence.*;
+import javax.persistence.criteria.CriteriaBuilder;
+import java.math.BigDecimal;
+import java.sql.Timestamp;
 
 @Entity
 @Table
@@ -10,11 +13,11 @@ public class MortgageRate {
     @GeneratedValue
     private Long id;
     @Column
-    private int maturityPeriod;
+    private Integer maturityPeriod;
+    @Column(precision = 5, scale = 4)
+    private BigDecimal interestRate;
     @Column
-    private float interestRate;
-    @Column
-    private String timeStamp;
+    private Timestamp timeStamp;
 
 
     public Long getId() {
@@ -25,27 +28,27 @@ public class MortgageRate {
         this.id = id;
     }
 
-    public int getMaturityPeriod() {
+    public Integer getMaturityPeriod() {
         return maturityPeriod;
     }
 
-    public void setMaturityPeriod(int maturityPeriod) {
+    public void setMaturityPeriod(Integer maturityPeriod) {
         this.maturityPeriod = maturityPeriod;
     }
 
-    public float getInterestRate() {
+    public BigDecimal getInterestRate() {
         return interestRate;
     }
 
-    public void setInterestRate(float interestRate) {
+    public void setInterestRate(BigDecimal interestRate) {
         this.interestRate = interestRate;
     }
 
-    public String getTimeStamp() {
+    public Timestamp getTimeStamp() {
         return timeStamp;
     }
 
-    public void setTimeStamp(String timeStamp) {
+    public void setTimeStamp(Timestamp timeStamp) {
         this.timeStamp = timeStamp;
     }
 }

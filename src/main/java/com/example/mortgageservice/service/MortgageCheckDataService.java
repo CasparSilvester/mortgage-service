@@ -6,6 +6,9 @@ import com.example.mortgageservice.repository.MortgageCheckDataRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 @Service
 public class MortgageCheckDataService {
 
@@ -14,7 +17,10 @@ public class MortgageCheckDataService {
     @Autowired
     private MortgageCheckResultService mortgageCheckResultService;
 
+    Logger logger = LoggerFactory.getLogger(MortgageCheckDataService.class);
+
     public MortgageCheckResult saveMortgageCheckData(MortgageCheckData mortgageCheckData){
+        logger.info("saving MortgageCheckData-entry");
         mortgageCheckDataRepository.save(mortgageCheckData);
         return mortgageCheckResultService.validate(mortgageCheckData);
     }

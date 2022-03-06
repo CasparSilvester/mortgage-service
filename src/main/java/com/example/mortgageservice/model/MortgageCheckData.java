@@ -12,13 +12,13 @@ public class MortgageCheckData {
     @Column
     @GeneratedValue
     private Long id;
-    @Column
+    @Column(nullable = false)
     private float income;
-    @Column
+    @Column(nullable = false)
     private int maturityPeriod;
-    @Column
+    @Column(nullable = false)
     private float loanValue;
-    @Column
+    @Column(nullable = false)
     private float homeValue;
 
     public Long getId() {

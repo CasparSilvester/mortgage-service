@@ -6,13 +6,20 @@ import com.example.mortgageservice.repository.MortgageCheckResultRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 @Service
 public class MortgageCheckResultService {
 
     @Autowired
     private MortgageCheckResultRepository mortgageCheckResultRepository;
 
+    Logger logger = LoggerFactory.getLogger(MortgageCheckResultService.class);
+
     public MortgageCheckResult validate(MortgageCheckData mortgageCheckData){
+        logger.info("validating mortgage");
+
         //validate according to business rules
         boolean feasible =
                 mortgageShouldNotExceed4TimesIncome(mortgageCheckData)&&
@@ -24,7 +31,8 @@ public class MortgageCheckResultService {
         //create new mortgageCheckResult object (with same Id!)
         MortgageCheckResult mortgageCheckResult=new MortgageCheckResult(
                 mortgageCheckData.getId(),
-                feasible, monthlyCost
+                feasible,
+                monthlyCost
         );
 
         //save result
