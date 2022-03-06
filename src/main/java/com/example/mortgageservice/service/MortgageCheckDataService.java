@@ -23,6 +23,7 @@ public class MortgageCheckDataService {
         logger.info("saving MortgageCheckData-entry");
         mortgageCheckDataRepository.save(mortgageCheckData);
         return mortgageCheckResultService.validate(mortgageCheckData);
+
     }
 
 }
