@@ -4,6 +4,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import java.math.BigDecimal;
 
 @Entity
 public class MortgageCheckData {
@@ -13,13 +14,13 @@ public class MortgageCheckData {
     @GeneratedValue
     private Long id;
     @Column(nullable = false)
-    private float income;
+    private BigDecimal income;
     @Column(nullable = false)
-    private int maturityPeriod;
+    private Integer maturityPeriod;
     @Column(nullable = false)
-    private float loanValue;
+    private BigDecimal loanValue;
     @Column(nullable = false)
-    private float homeValue;
+    private BigDecimal homeValue;
 
     public Long getId() {
         return id;
@@ -29,15 +30,15 @@ public class MortgageCheckData {
         this.id = id;
     }
 
-    public float getIncome() {
+    public BigDecimal getIncome() {
         return income;
     }
 
-    public void setIncome(float income) {
+    public void setIncome(BigDecimal income) {
         this.income = income;
     }
 
-    public int getMaturityPeriod() {
+    public Integer getMaturityPeriod() {
         return maturityPeriod;
     }
 
@@ -45,19 +46,19 @@ public class MortgageCheckData {
         this.maturityPeriod = maturityPeriod;
     }
 
-    public float getLoanValue() {
+    public BigDecimal getLoanValue() {
         return loanValue;
     }
 
-    public void setLoanValue(float loanValue) {
+    public void setLoanValue(BigDecimal loanValue) {
         this.loanValue = loanValue;
     }
 
-    public float getHomeValue() {
+    public BigDecimal getHomeValue() {
         return homeValue;
     }
 
-    public void setHomeValue(float homeValue) {
+    public void setHomeValue(BigDecimal homeValue) {
         this.homeValue = homeValue;
     }
 }

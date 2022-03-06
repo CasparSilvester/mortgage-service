@@ -5,6 +5,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import java.math.BigDecimal;
 
 @Entity
 @Table
@@ -13,12 +14,12 @@ public class MortgageCheckResult {
     @Column
     private Long id;
     @Column
-    private boolean feasible;
+    private Boolean feasible;
     @Column
-    private float monthlyCosts;
+    private BigDecimal monthlyCosts;
 
     public MortgageCheckResult(){}
-    public MortgageCheckResult(Long id, boolean feasible, float monthlyCosts){
+    public MortgageCheckResult(Long id, boolean feasible, BigDecimal monthlyCosts){
         this.id=id;
         this.feasible=feasible;
         this.monthlyCosts=monthlyCosts;
@@ -41,11 +42,11 @@ public class MortgageCheckResult {
         this.feasible = feasible;
     }
 
-    public float getMonthlyCosts() {
+    public BigDecimal getMonthlyCosts() {
         return monthlyCosts;
     }
 
-    public void setMonthlyCosts(float monthlyCosts) {
+    public void setMonthlyCosts(BigDecimal monthlyCosts) {
         this.monthlyCosts = monthlyCosts;
     }
 }
