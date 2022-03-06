@@ -17,15 +17,15 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-public class MortgageController {
-   
+public class MortgageServiceController {
+
     @Autowired
     MortgageRateService mortgageRateService;
     @Autowired
     MortgageCheckDataService mortgageCheckDataService;
 
 
-    Logger logger = LoggerFactory.getLogger(MortgageController.class);
+    Logger logger = LoggerFactory.getLogger(MortgageServiceController.class);
 
     @GetMapping("/interest-rates")
     private List<MortgageRate> getAllMortgageRates(){
