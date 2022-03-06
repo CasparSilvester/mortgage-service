@@ -36,11 +36,11 @@ public class MortgageCheckResultService {
 
 
     private boolean mortgageShouldNotExceed4TimesIncome(MortgageCheckData mortgageCheckData){
-        return true;
+        return (mortgageCheckData.getIncome()*4)>mortgageCheckData.getLoanValue();
     }
 
     private boolean mortgageShouldNotExceedHomeValue(MortgageCheckData mortgageCheckData){
-        return true;
+        return mortgageCheckData.getLoanValue()<mortgageCheckData.getHomeValue();
     }
 
     private float calculateMonthlyCost(MortgageCheckData mortgageCheckData){

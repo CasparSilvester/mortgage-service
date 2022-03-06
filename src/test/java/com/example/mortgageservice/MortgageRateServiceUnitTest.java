@@ -1,8 +1,8 @@
 package com.example.mortgageservice;
 
 
-import com.example.mortgageservice.model.Book;
-import com.example.mortgageservice.service.BookService;
+import com.example.mortgageservice.model.MortgageRate;
+import com.example.mortgageservice.service.MortgageRateService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -13,15 +13,15 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 
 @SpringBootTest
-public class BookServiceUnitTest {
+public class MortgageRateServiceUnitTest {
 
     @Autowired
-    private BookService bookService;
+    private MortgageRateService mortgageCheckResultService;
 
     @Test
     public void whenApplicationStarts_thenHibernateCreatesInitialRecords() {
-        List<Book> books = bookService.list();
+        List<MortgageRate> mortgageRates = mortgageCheckResultService.list();
         System.out.println("testing");
-        assertEquals(books.size(), 3);
+        assertEquals(mortgageRates.size(), 3);
     }
 }
