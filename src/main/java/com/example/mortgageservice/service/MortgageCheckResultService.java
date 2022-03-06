@@ -10,6 +10,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 
 @Service
 public class MortgageCheckResultService {
@@ -46,21 +47,17 @@ public class MortgageCheckResultService {
 
 
     private boolean mortgageShouldNotExceed4TimesIncome(MortgageCheckData mortgageCheckData){
-        //return (mortgageCheckData.getIncome()*4)>mortgageCheckData.getLoanValue();
-
         int result= mortgageCheckData.getIncome().multiply(new BigDecimal(4)).compareTo(mortgageCheckData.getLoanValue());
         return result > 0;
     }
 
     private boolean mortgageShouldNotExceedHomeValue(MortgageCheckData mortgageCheckData){
-        //return mortgageCheckData.getLoanValue()<mortgageCheckData.getHomeValue();
         int result= mortgageCheckData.getHomeValue().compareTo(mortgageCheckData.getLoanValue());
         return result > 0;
     }
 
     private BigDecimal calculateMonthlyCost(MortgageCheckData mortgageCheckData){
-        //return (BigDecimal)(mortgageCheckData.getLoanValue()/mortgageCheckData.getMaturityPeriod());
-        return mortgageCheckData.getLoanValue().divide(new BigDecimal(mortgageCheckData.getMaturityPeriod()));
+        return mortgageCheckData.getLoanValue().divide(new BigDecimal(mortgageCheckData.getMaturityPeriod()),2, RoundingMode.CEILING);
 
     }
 }
