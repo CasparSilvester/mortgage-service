@@ -6,4 +6,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface MortgageRateRepository  extends JpaRepository<MortgageRate, Long> {
+    MortgageRate findByMaturityPeriod(Integer maturityPeriod);
 }

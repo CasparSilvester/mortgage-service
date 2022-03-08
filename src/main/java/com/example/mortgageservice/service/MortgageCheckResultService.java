@@ -17,6 +17,8 @@ public class MortgageCheckResultService {
 
     @Autowired
     private MortgageCheckResultRepository mortgageCheckResultRepository;
+    @Autowired
+            private MortgageRateService mortgageRateService;
 
     Logger logger = LoggerFactory.getLogger(MortgageCheckResultService.class);
 
@@ -57,7 +59,13 @@ public class MortgageCheckResultService {
         return result > 0;
     }
 
+    //todo: compute benefits: (loanAmount * interestRate)/12
+    //      retrieve mortgageRate for certain maturityPeriod
+    //      and use it to calculate the monthlyCosts
+
     private BigDecimal calculateMonthlyCost(MortgageCheckData mortgageCheckData){
+        BigDecimal interestRate= mortgageRateService.getInterestRateForMaturityPeriod(mortgageCheckData.getMaturityPeriod());
+        logger.info("using interestRate of : "+ interestRate);
         if(mortgageCheckData.getMaturityPeriod()<=0) return BigDecimal.ZERO;
         return mortgageCheckData.getLoanValue().divide(new BigDecimal(mortgageCheckData.getMaturityPeriod()),2, RoundingMode.CEILING);
 

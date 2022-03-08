@@ -39,4 +39,6 @@ public class MortgageServiceController {
         logger.info("received POST at:\t/mortgage-check");
         return mortgageCheckDataService.saveMortgageCheckData(mortgageCheckData);
     }
+
+
 }
