@@ -64,10 +64,24 @@ public class MortgageCheckResultService {
     //      and use it to calculate the monthlyCosts
 
     private BigDecimal calculateMonthlyCost(MortgageCheckData mortgageCheckData){
-        BigDecimal interestRate= mortgageRateService.getInterestRateForMaturityPeriod(mortgageCheckData.getMaturityPeriod());
+        // if maturityPeriod is zero, we can't calculate valid monthlyCosts
+        if(mortgageCheckData.getMaturityPeriod()<=0) return null;
+
+        //retrieve corresponding interestRate for a certain maturityPeriod
+        BigDecimal interestRate = mortgageRateService.getInterestRateForMaturityPeriod(mortgageCheckData.getMaturityPeriod());
+        //return null value when no interestRate can be found for a certain maturityPeriod (although exception occurs first)
+        if(interestRate==null) return null;
+
+        //calculate monthlyInterest with formula (yearlyInterest/12=loanAmount*interestRate
+        BigDecimal monthlyInterest= (mortgageCheckData.getLoanValue()
+                .multiply(interestRate.divide(new BigDecimal(100)))).divide(new BigDecimal(12));
         logger.info("using interestRate of : "+ interestRate);
-        if(mortgageCheckData.getMaturityPeriod()<=0) return BigDecimal.ZERO;
-        return mortgageCheckData.getLoanValue().divide(new BigDecimal(mortgageCheckData.getMaturityPeriod()),2, RoundingMode.CEILING);
+
+        //calculate monthlyMortgagePayment
+        BigDecimal monthlyMortgagePayment= mortgageCheckData.getLoanValue().divide(new BigDecimal(mortgageCheckData.getMaturityPeriod()),2, RoundingMode.CEILING);
+
+        //totalMonthlyCosts=  monthlyMortgagePayment + monthlyInterest
+        return monthlyMortgagePayment.add(monthlyInterest);
 
     }
 
