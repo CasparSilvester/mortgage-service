@@ -18,11 +18,13 @@ public class MortgageCheckResult {
     @Column
     private BigDecimal monthlyCosts;
 
-    public MortgageCheckResult(){}
-    public MortgageCheckResult(Long id, boolean feasible, BigDecimal monthlyCosts){
-        this.id=id;
-        this.feasible=feasible;
-        this.monthlyCosts=monthlyCosts;
+    public MortgageCheckResult() {
+    }
+
+    public MortgageCheckResult(Long id, boolean feasible, BigDecimal monthlyCosts) {
+        this.id = id;
+        this.feasible = feasible;
+        this.monthlyCosts = monthlyCosts;
 
     }
 

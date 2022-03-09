@@ -17,7 +17,7 @@ public class MortgageRateService {
         return mortgageRateRepository.findAll();
     }
 
-    public BigDecimal getInterestRateForMaturityPeriod(Integer maturityPeriod){
+    public BigDecimal getInterestRateForMaturityPeriod(Integer maturityPeriod) {
         return mortgageRateRepository.findByMaturityPeriod(maturityPeriod).getInterestRate();
     }
 }

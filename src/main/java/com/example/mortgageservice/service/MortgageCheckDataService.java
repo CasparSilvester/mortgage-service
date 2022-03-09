@@ -20,9 +20,9 @@ public class MortgageCheckDataService {
 
     Logger logger = LoggerFactory.getLogger(MortgageCheckDataService.class);
 
-    public MortgageCheckResult saveMortgageCheckData(MortgageCheckData mortgageCheckData){
+    public MortgageCheckResult saveMortgageCheckData(MortgageCheckData mortgageCheckData) {
         logger.info("saving MortgageCheckData-entry");
-        if(mortgageCheckData.getId()!= null) throw new IDProvidedException();
+        if (mortgageCheckData.getId() != null) throw new IDProvidedException();
         mortgageCheckDataRepository.save(mortgageCheckData);
         return mortgageCheckResultService.validate(mortgageCheckData);
 
